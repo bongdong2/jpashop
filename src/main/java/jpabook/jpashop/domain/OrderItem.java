@@ -1,7 +1,9 @@
 package jpabook.jpashop.domain;
 
 import jpabook.jpashop.domain.item.Item;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,6 +12,7 @@ import static javax.persistence.FetchType.*;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderItem {
 
     @Id @GeneratedValue
@@ -26,6 +29,16 @@ public class OrderItem {
 
     private int orderPrice; // 주문가격
     private int count; // 주문수량
+
+    // createOrderItem 생성 메서드가 아닌 new로 주문아이템을 생성하는 것을 막기 위함
+    // JPA는 protected까지 기본생성자를 만들 수 있게 지원한다.
+    // JPA 쓰면서 protected는 쓰지 말라는 것.
+    /*
+    protected OrderItem() {
+    }
+    lombok
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    */
 
     //==생성 메서드==//
     public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
