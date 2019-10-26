@@ -45,4 +45,13 @@ public abstract class Item {
         }
         this.stockQuantity = restStock;
     }
+
+    /**
+     *  Item property 변경
+     */
+    public void change(String name, int price, int stockQuantity) {
+        this.name = name;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
+    }
 }
